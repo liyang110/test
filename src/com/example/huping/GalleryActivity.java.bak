@@ -1,0 +1,89 @@
+package com.example.huping;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class GalleryActivity extends Activity{
+	@SuppressWarnings("deprecation")
+	ListView mListView;
+    String [] names={"1adfe","2slkuein","3sdufwie","4skiwwpo","5jsdue89","djfh",
+    		"deonap"};
+    
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	this.setContentView(R.layout.activity_main);
+	mListView=(ListView) this.findViewById(R.id.cus_gallery);
+	mListView.setAdapter(new MyAdapter());
+	
+	super.onCreate(savedInstanceState);
+	
+}
+private ListView setAdapter() {
+	// TODO Auto-generated method stub
+	return null;
+}
+class MyAdapter extends BaseAdapter{
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return names.length;
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		Log.e("getView","getView");
+		//TextView textView=new TextView(GalleryActivity.this);
+        //textView.setText("123456");
+       
+        if(convertView!=null){
+        	/**convertView=new TextView(GalleryActivity.this);
+        	((TextView)convertView).setText(""+position);
+        	Log.e("true", "true");**/
+        }else{
+        	convertView=new TextView(GalleryActivity.this);
+            convertView=LayoutInflater.from(GalleryActivity.this).
+        	inflate(R.layout.detail,null);
+        	// Log.e("converView", "converView");
+            // convertView.getId();  
+            
+        }   
+        ViewHolder holder=(ViewHolder)convertView.getTag();
+        if(holder==null){
+        	holder.name=((TextView)convertView.findViewById(R.id.name));
+        	convertView.setTag(holder);
+        }
+        
+    	holder.name.setText(names[position]);
+		return convertView;
+  	
+	}
+	
+}
+class ViewHolder{
+	TextView name;
+}
+
+}
